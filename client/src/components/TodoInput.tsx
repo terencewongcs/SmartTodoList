@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
-import { useDispatch, UseDispatch } from 'react-redux'
-import { createTodo } from '../redux/action'
+import { useDispatch } from 'react-redux'
+import { createTodo } from '../features/todos/todoSlice';
 
 
 const TodoInput:React.FC = () => {

@@ -1,14 +1,15 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import { toggleTodo } from '../redux/action';
+import { toggleTodo } from '../features/todos/todoSlice';
+import { RootState } from '../app/store';
 
 const TodoList:React.FC = () => {
-    const todosInStore = useSelector((state:any) => state.todos);
+    const todosInStore = useSelector((state:RootState) => state.todo.todos);
     const dispatch = useDispatch();
   return (
     <div>
       <ul>
-      {todosInStore.map((todo:any) => (
+      {todosInStore?.map((todo:any) => (
         <label>
             <li key={todo.id} className={todo.done ?'done':''}>
                 {todo.todo}
