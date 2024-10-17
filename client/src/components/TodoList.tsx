@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import { toggleTodo,createTodo } from '../redux/action';
+import { toggleTodo } from '../redux/action';
 
 const TodoList:React.FC = () => {
     const todosInStore = useSelector((state:any) => state.todos);
