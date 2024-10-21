@@ -1,25 +1,40 @@
-import React from 'react'
-import { useSelector,useDispatch } from 'react-redux'
-import { toggleTodo } from '../features/todos/todoSlice';
-import { RootState } from '../app/store';
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTodoAsync, fetchTodosAsync } from "../app/todoSlice";
+import { RootState } from "../app/store";
 
-const TodoList:React.FC = () => {
-    const todosInStore = useSelector((state:RootState) => state.todo.todos);
-    const dispatch = useDispatch();
+const TodoList: React.FC = () => {
+  const {
+    todos,loading,error
+  } = useSelector((state: RootState) => state.todo);
+
+  const dispatch = useDispatch();
+
+  if (loading === true) return <div>Loading...</div>;
+
+  if (error)
+    return <div>Fetching todos failed: {error}</div>;
+
   return (
     <div>
       <ul>
-      {todosInStore?.map((todo:any) => (
-        <label>
-            <li key={todo.id} className={todo.done ?'done':''}>
-                {todo.todo}
-                <input type='checkbox' checked={todo.done} onChange={()=>dispatch(toggleTodo(todo.id))} />
+        {todos?.map((todo: any) => (
+          
+            <li key={todo._id} className={todo.done ? "done" : ""}>
+              <label>
+              {todo.todo}
+              <input
+                type="checkbox"
+                checked={todo.done}
+                onChange={() => dispatch(toggleTodoAsync(todo._id))}
+              />
+              </label>
             </li>
-        </label>
-    ))}
+            
+        ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default TodoList
+export default TodoList;

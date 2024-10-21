@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { useDispatch } from 'react-redux'
-import { createTodo } from '../features/todos/todoSlice';
+import { createTodoAsync } from '../app/todoSlice';
 
 
 const TodoInput:React.FC = () => {
@@ -8,7 +8,7 @@ const TodoInput:React.FC = () => {
     const dispatch = useDispatch();
     const handleSubmit = (event:React.FormEvent)=>{
         event.preventDefault();
-        dispatch(createTodo(text));
+        dispatch(createTodoAsync(text));
         setText('');
     }
   return (
